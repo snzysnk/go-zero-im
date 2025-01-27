@@ -1,0 +1,17 @@
+syntax = "v1"
+
+type (
+	UserReq {
+		Id string `json:"id"`
+	}
+	UserRes {
+		Id   string `json:"id"`
+		Name string `json:"name"`
+	}
+)
+
+service User {
+	@handler user
+	get /user (UserReq) returns (UserRes)
+}
+
