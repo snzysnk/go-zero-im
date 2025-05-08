@@ -14,11 +14,15 @@ import (
 )
 
 type (
-	UserReq = user.UserReq
-	UserRes = user.UserRes
+	CreateReq = user.CreateReq
+	CreateRes = user.CreateRes
+	UserReq   = user.UserReq
+	UserRes   = user.UserRes
 
 	User interface {
 		GetUser(ctx context.Context, in *UserReq, opts ...grpc.CallOption) (*UserRes, error)
+		// 添加 CreateUser 来测试在 go-zero 中使用mysql
+		CreateUser(ctx context.Context, in *CreateReq, opts ...grpc.CallOption) (*CreateRes, error)
 	}
 
 	defaultUser struct {
@@ -35,4 +39,10 @@ func NewUser(cli zrpc.Client) User {
 func (m *defaultUser) GetUser(ctx context.Context, in *UserReq, opts ...grpc.CallOption) (*UserRes, error) {
 	client := user.NewUserClient(m.cli.Conn())
 	return client.GetUser(ctx, in, opts...)
+}
+
+// 添加 CreateUser 来测试在 go-zero 中使用mysql
+func (m *defaultUser) CreateUser(ctx context.Context, in *CreateReq, opts ...grpc.CallOption) (*CreateRes, error) {
+	client := user.NewUserClient(m.cli.Conn())
+	return client.CreateUser(ctx, in, opts...)
 }

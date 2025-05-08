@@ -21,4 +21,17 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 		},
 	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.AuthInterceptor},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/user",
+					Handler: createUserHandler(serverCtx),
+				},
+			}...,
+		),
+	)
 }

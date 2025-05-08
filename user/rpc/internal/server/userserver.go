@@ -27,3 +27,9 @@ func (s *UserServer) GetUser(ctx context.Context, in *user.UserReq) (*user.UserR
 	l := logic.NewGetUserLogic(ctx, s.svcCtx)
 	return l.GetUser(in)
 }
+
+// 添加 CreateUser 来测试在 go-zero 中使用mysql
+func (s *UserServer) CreateUser(ctx context.Context, in *user.CreateReq) (*user.CreateRes, error) {
+	l := logic.NewCreateUserLogic(ctx, s.svcCtx)
+	return l.CreateUser(in)
+}

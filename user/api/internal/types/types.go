@@ -3,6 +3,14 @@
 
 package types
 
+type CreateReq struct {
+	Name string `json:"name"`
+}
+
+type CreateRes struct {
+	Id string `json:"id"`
+}
+
 type UserReq struct {
 	Id string `json:"id"`
 }

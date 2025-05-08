@@ -2,5 +2,15 @@ Name: user.rpc
 ListenOn: 0.0.0.0:8080
 Etcd:
   Hosts:
-  - 127.0.0.1:2379
+    - etcd:2379
   Key: user.rpc
+
+# 配置mysql数据源
+Mysql:
+  DataSource: xieruixiang:Iam@123456@tcp(139.196.105.2:3306)/go_zero_im?charset=utf8mb4
+
+# 缓存默认就是redis的 匹配 github.com/zeromicro/go-zero@v1.7.6/core/stores/redis/conf.go:21 的结构
+Cache:
+  - Host: 139.196.105.2:6379
+    Type: node
+    Pass:

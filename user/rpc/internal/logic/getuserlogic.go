@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"strconv"
 
 	"go-zero-im/rpc/internal/svc"
 	"go-zero-im/rpc/user"
@@ -24,8 +25,16 @@ func NewGetUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUserLo
 }
 
 func (l *GetUserLogic) GetUser(in *user.UserReq) (*user.UserRes, error) {
+	id, err := strconv.ParseInt(in.Id, 10, 64)
+	if err != nil {
+		return nil, err
+	}
+	userData, err := l.svcCtx.UserModel.FindOne(l.ctx, uint64(id))
+	if err != nil {
+		return nil, err
+	}
 	return &user.UserRes{
-		Id:   in.Id,
-		Name: "test",
+		Id:   strconv.Itoa(int(userData.Id)),
+		Name: userData.Name,
 	}, nil
 }

@@ -4,6 +4,8 @@ option go_package = "./user";
 
 service User{
   rpc GetUser(UserReq) returns (UserRes){}
+  //添加 CreateUser 来测试在 go-zero 中使用mysql
+  rpc CreateUser(CreateReq) returns (CreateRes) {}
 }
 
 message UserReq{
@@ -13,5 +15,13 @@ message UserReq{
 message UserRes{
   string id = 1;
   string name = 2;
+}
+
+message CreateReq {
+  string name = 1;
+}
+
+message CreateRes {
+  string id = 1;
 }
 

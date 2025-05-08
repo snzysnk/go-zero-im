@@ -2,10 +2,9 @@ package logic
 
 import (
 	"context"
-	"go-zero-im/rpc/userclient"
-
 	"go-zero-im/api/internal/svc"
 	"go-zero-im/api/internal/types"
+	"go-zero-im/rpc/userclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

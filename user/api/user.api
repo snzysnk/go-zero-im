@@ -8,10 +8,25 @@ type (
 		Id   string `json:"id"`
 		Name string `json:"name"`
 	}
+	CreateReq {
+		Name string `json:"name"`
+	}
+	CreateRes {
+		Id string `json:"id"`
+	}
 )
 
 service User {
 	@handler user
 	get /user (UserReq) returns (UserRes)
+}
+
+//给下面的方法增加中间件 AuthInterceptor的认证，不会影响上面的方法
+@server (
+	middleware: AuthInterceptor
+)
+service User {
+	@handler createUser
+	post /user (CreateReq) returns (CreateRes)
 }
 
